@@ -3,7 +3,7 @@
 
 var http = require( 'http' );
 
-var mappings = require( './mappings' );
+var mappings = require( './data/mappings' );
 
 var server = http.createServer( function ( req, res ) {
     var mapping = mappings.get( req.url, function( err, mapping){

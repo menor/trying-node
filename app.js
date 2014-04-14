@@ -6,9 +6,9 @@ var http = require( 'http' );
 var mappings = require( './mappings' );
 
 var server = http.createServer( function ( req, res ) {
-    var mapping = mappings.get( req.url );
+    var mapping = mappings.get( req.url, function( err, mapping){
 
-    if( !mapping ) {
+    if( err ) {
         res.writeHead(404);
         return res.end();
     }
@@ -17,6 +17,8 @@ var server = http.createServer( function ( req, res ) {
         location: mapping
     });
     res.end();
+    });
 });
+
 
 server.listen( 3000 );

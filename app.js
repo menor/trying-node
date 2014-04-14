@@ -8,13 +8,12 @@ var http = require( 'http' );
 var connect = require( 'connect' );
 
 // Custom Modules
-var mappings = require( './data/mappings' );
+var logger = require( './logger' ),
+    mappings = require( './data/mappings' );
 
 var app = connect();
 
-app.use(function ( req, res, next ) {
-
-});
+app.use( logger );
 
 app.use( function ( req, res ){
 	var mapping = mappings.get( req.url, function( err, mapping){

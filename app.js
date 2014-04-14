@@ -1,24 +1,34 @@
 /*jslint node: true */
 'use strict';
 
+// Integrated Modules
 var http = require( 'http' );
 
+// Third Party Modules
+var connect = require( 'connect' );
+
+// Custom Modules
 var mappings = require( './data/mappings' );
 
-var server = http.createServer( function ( req, res ) {
-    var mapping = mappings.get( req.url, function( err, mapping){
+var app = connect();
 
-    if( err ) {
-        res.writeHead(404);
-        return res.end();
-    }
+app.use(function ( req, res, next ) {
 
-    res.writeHead( 302, {
-        location: mapping
-    });
-    res.end();
-    });
 });
 
+app.use( function ( req, res ){
+	var mapping = mappings.get( req.url, function( err, mapping){
 
-server.listen( 3000 );
+	if  ( err ) {
+		res.writeHead(404);
+		return res.end();
+	}
+
+	res.writeHead( 302, {
+		location: mapping
+	});
+	res.end();
+	});
+});
+
+http.createServer( app ).listen( 3000 );

@@ -7,6 +7,17 @@
 
 <body>
     <h1>Mappings</h1>
-    <%= mappings %>    
+    <table>
+        <tr>
+            <th>Alias</th>
+            <th>URL</th>
+        </tr>
+    </table>
+    <% for ( var i = 0; i < mappings.length; i += 1 ) { %>
+        <tr>
+            <td><%= mappings[i].alias %></td>
+            <td><%= mappings[i].url %></td>
+        </tr>
+    <% } %>
 </body>
 </html>

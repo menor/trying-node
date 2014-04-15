@@ -20,8 +20,10 @@ app.set( 'view engine', 'ejs' );
 app.use( logger( 'redirector' ) );
 
 app.get('/', function (req, res) {
-  res.render( 'index', {
-    mappings: 'Hello world from EJS!'
+  mappings.list( function ( err, documents ) {
+    res.render( 'index', {
+      mappings: documents
+    });
   });
 });
 

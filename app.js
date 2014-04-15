@@ -5,13 +5,13 @@
 var http = require( 'http' );
 
 // Third Party Modules
-var connect = require( 'connect' );
+var express = require( 'express' );
 
 // Custom Modules
 var logger = require( './logger' ),
     mappings = require( './data/mappings' );
 
-var app = connect();
+var app = express();
 
 app.use( logger( 'redirector' ) );
 

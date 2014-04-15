@@ -6,9 +6,7 @@ var data = {
 };
 
 var mappings = {
-  get: function( url, callback ){
-    var alias = url.substring(1);
-
+  get: function( alias, callback ){
     if ( !data[alias] ) {
       // This is standard in Node first parameter is the error
       // Second parameter is what we are returning, since it is

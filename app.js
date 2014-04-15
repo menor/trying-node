@@ -15,8 +15,8 @@ var app = express();
 
 app.use( logger( 'redirector' ) );
 
-app.use( function ( req, res ){
-	var mapping = mappings.get( req.url, function( err, mapping){
+app.get( '/:alias', function ( req, res ) {
+	var mapping = mappings.get( req.params.alias, function( err, mapping){
 
 	if  ( err ) {
 		res.writeHead(404);

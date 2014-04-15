@@ -15,6 +15,10 @@ var app = express();
 
 app.use( logger( 'redirector' ) );
 
+app.get( '/', function( req, res) {
+  res.render( 'index' );
+});
+
 app.get( '/:alias', function ( req, res ) {
 	var mapping = mappings.get( req.params.alias, function( err, mapping){
 

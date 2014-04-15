@@ -1,22 +1,27 @@
 /*jslint node: true */
 'use strict';
 
-var data = {
-  g: 'http://www.google.com'
+var path = require( 'path');
+
+var Datastore = require( 'nedb' );
+
+var db = {
+  mappings: new Datastore({ filename: path.join( __dirname, 'mappings.db'), autoload: true })
 };
 
-var mappings = {
-  get: function( alias, callback ){
-    if ( !data[alias] ) {
-      // This is standard in Node first parameter is the error
-      // Second parameter is what we are returning, since it is
-      // undefined we can leave it blank
-      return callback( new Error( 'URL not found.' ));
-    }
+db.mappings.insert({ alias: 'g', url: 'http://www.google.com' },
+  function ( err, insertedDocument ) {
+    /// ...
+});
 
-    // Same here, first is the error (null in this case since there
-    // are no errors) and second is what we want to return
-    callback( null, data[alias] );
+var mappings = {
+  get: function ( alias, callback ){
+    db.mappings.findOne({ alias: alias }, function ( err, mapping ) {
+      if ( err || !mapping ) {
+        return callback( new Error( 'Alias not found.' ));
+      }
+      callback( null, mapping.url );
+    });
   }
 };
 

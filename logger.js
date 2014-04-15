@@ -6,8 +6,8 @@ var setup = function( appName ) {
     if ( req.hasLoggingBeenRun ) {
       next();
     }
-    
-    console.log( appName + '| ' + req.method + ' ' + req.url );
+
+    console.log( appName + ' | ' + req.method + ' ' + req.url );
     req.hasLoggingBeenRun = true;
     next();
   };
